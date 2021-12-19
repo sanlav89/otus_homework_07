@@ -2,16 +2,19 @@
 #include <iostream>
 #include <list>
 
+#include "filelist.h"
+
 namespace po = boost::program_options;
 
 using strlist_t = std::vector<std::string>;
 
 int main(int argc, const char *argv[]) {
     try {
+        filelist::dirs_t dirs;
         po::options_description desc{"Options"};
         desc.add_options()
                 ("help,h", "Suppported commands")
-                ("incdir,i", po::value<strlist_t>()->composing()->required(), "directories for scan")
+                ("incdir,i", po::value<strlist_t>(&dirs)->composing()->required(), "directories for scan")
                 ("excdir,e", po::value<strlist_t>()->composing(), "excluded directories for scan")
                 ("minsize,s", po::value<size_t>()->default_value(1), "minimal size of file")
                 ("mask,m", po::value<strlist_t>()->composing(), "masks of files")
@@ -27,6 +30,8 @@ int main(int argc, const char *argv[]) {
         }
 
         po::notify(vm);
+
+        filelist::FileListCreator fl(dirs);
 
 //        if (vm.count("help")) {
 //            std::cout << desc << '\n';

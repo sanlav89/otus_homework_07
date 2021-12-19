@@ -8,7 +8,7 @@ set(PROJECT_NAME "bayan" CACHE STRING "Project name")
 project(${PROJECT_NAME} VERSION ${PROJECT_VESRION})
 
 # Boost
-find_package(Boost COMPONENTS program_options REQUIRED)
+find_package(Boost COMPONENTS program_options filesystem REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
 # SOURCES
@@ -20,6 +20,7 @@ set (
 # HEADERS
  set (
      HEADERS
+        filelist.h
 #        matrix.h
  )
 
@@ -41,6 +42,11 @@ target_link_libraries(
     bayan
         ${Boost_LIBRARIES}
         )
+target_link_libraries(
+    bayan
+        ${Boost_FILESYSTEM_LIBRARY}
+#        ${Boost_SYSTEM_LIBRARY}
+    )
 
 # Compiler options
 if (MSVC)
