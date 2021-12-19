@@ -7,6 +7,10 @@ set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 set(PROJECT_NAME "bayan" CACHE STRING "Project name")
 project(${PROJECT_NAME} VERSION ${PROJECT_VESRION})
 
+# Boost
+find_package(Boost COMPONENTS program_options REQUIRED)
+include_directories(${Boost_INCLUDE_DIR})
+
 # SOURCES
 set (
     SOURCES
@@ -33,6 +37,10 @@ set_target_properties (
 # INCLUDEPATH
 
 # Linking
+target_link_libraries(
+    bayan
+        ${Boost_LIBRARIES}
+        )
 
 # Compiler options
 if (MSVC)
