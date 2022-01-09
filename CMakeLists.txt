@@ -14,13 +14,14 @@ include_directories(${Boost_INCLUDE_DIR})
 # SOURCES
 set (
     SOURCES
+        filesfilter.cpp
         main.cpp
 )
 
 # HEADERS
  set (
      HEADERS
-        filelist.h
+        filesfilter.h
 #        matrix.h
  )
 
