@@ -22,6 +22,7 @@ include_directories(${Boost_INCLUDE_DIR})
 # SOURCES
 set (
     SOURCES
+        hash.cpp
         filesfilter.cpp
         main.cpp
 )
@@ -29,6 +30,7 @@ set (
 # HEADERS
 set (
     HEADERS
+        hash.h
         filesfilter.h
 )
 
