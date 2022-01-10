@@ -8,6 +8,8 @@
 namespace po = boost::program_options;
 namespace ff = filesfilter;
 
+// Windows run example
+// D:\WORK\OTUS\build-otus_homework_07-Desktop_Qt_5_15_0_MinGW_64_bit-Debug>bayan -i ../otus_homework_07/_test_folder/ -l 1
 int main(int argc, const char *argv[])
 {
 
