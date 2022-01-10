@@ -94,7 +94,7 @@ bool SameFilesFinder::fileMaskMatched(
     }
 
     boost::smatch what;
-    if (!boost::regex_match(pathEntry.filename().native(), what,
+    if (!boost::regex_match(pathEntry.filename().string(), what,
                             boost::regex(mask, boost::regex::icase))) {
         return false;
     }
@@ -108,6 +108,6 @@ void SameFilesFinder::printPathContainer(
         )
 {
     for (const auto &path : pathContainer) {
-        os << fs::canonical(path).native() << std::endl;
+        os << fs::canonical(path).string() << std::endl;
     }
 }

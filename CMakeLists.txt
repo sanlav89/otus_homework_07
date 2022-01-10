@@ -8,6 +8,14 @@ set(PROJECT_NAME "bayan" CACHE STRING "Project name")
 project(${PROJECT_NAME} VERSION ${PROJECT_VESRION})
 
 # Boost
+# NOTES:
+# 1. Installing BOOST for Windows:
+# https://gist.github.com/zrsmithson/0b72e0cb58d0cb946fc48b5c88511da8
+# 2. CMAKE compatibility: set system environment variables
+# BOOST_ROOT          D:\boost
+# BOOST_INCLUDEDIR    D:\boost\include\boost-1_78
+# BOOST_LIBRARYDIR    D:\boost\lib
+# https://stackoverflow.com/questions/20969280/find-package-doesnt-detect-boost-on-windows-cmake
 find_package(Boost COMPONENTS program_options filesystem regex REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
@@ -19,11 +27,10 @@ set (
 )
 
 # HEADERS
- set (
-     HEADERS
+set (
+    HEADERS
         filesfilter.h
-#        matrix.h
- )
+)
 
 # EXECUTABLE
 add_executable(bayan ${SOURCES} ${HEADERS})
