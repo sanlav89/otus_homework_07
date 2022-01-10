@@ -8,10 +8,42 @@
 namespace po = boost::program_options;
 namespace ff = filesfilter;
 
+using boost::uuids::detail::md5;
+
+std::string toString(const md5::digest_type &digest)
+{
+    const auto charDigest = reinterpret_cast<const char *>(&digest);
+    std::string result;
+    boost::algorithm::hex(charDigest, charDigest + sizeof(md5::digest_type), std::back_inserter(result));
+    return result;
+}
+
 int main(int argc, const char *argv[])
 {
 
     try {
+
+        std::string ddd("qwer");
+        md5 hash, hash2;
+        md5::digest_type digest, digest2;
+
+        hash.process_bytes(ddd.data(), ddd.size());
+        hash.get_digest(digest);
+
+        hash2.process_bytes("qwer", 4);
+        hash2.get_digest(digest2);
+
+        boost::crc_32_type crc32;
+        crc32.process_bytes(ddd.data(), ddd.size());
+
+        std::cout << digest << " " << toString(digest) << std::endl;
+        std::cout << digest2 << " " << toString(digest2) << std::endl;
+
+        std::cout << hash::crc32_t(ddd.data(), ddd.size()).toString() << std::endl;
+        std::cout << hash::md5_t(ddd.data(), ddd.size()).toString() << std::endl;
+
+//        printf("%08X%08X%08X%08X\n", digest[0], digest[1], digest[2], digest[3]);
+//        printf("%08X\n", crc32.checksum());
 
         ff::filenames_t included, excluded;
         ff::mask_t mask;

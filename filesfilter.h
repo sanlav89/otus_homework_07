@@ -5,11 +5,12 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <boost/filesystem.hpp>
 #include <boost/range/iterator_range.hpp>
 #include <boost/regex.hpp>
 #include <boost/algorithm/string.hpp>
-#include <iostream>
+#include "hash.h"
 
 namespace fs = boost::filesystem;
 
@@ -61,10 +62,11 @@ private:
             const level_t &level
             );
 
-    // void findSameFiles();
-
     bool contains(const pathconteiner_t &pathContainer, const path_t &pathEntry);
     bool fileMaskMatched(const path_t &pathEntry, const mask_t &mask);
+
+    void findSameFiles(const pathconteiner_t &filelist, size_t blockNumber);
+    hash::md5_t hashOfFileBlock(const path_t &filename, size_t blockNumber);
 
     static void printPathContainer(const pathconteiner_t &pathContainer, std::ostream &os = std::cout);
 
