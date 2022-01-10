@@ -1,0 +1,4 @@
+# 1. Installing BOOST for Windows:
+# https://gist.github.com/zrsmithson/0b72e0cb58d0cb946fc48b5c88511da8
+# 2. CMAKE compatibility: set system environment variables
+# BOOST_ROOT          D:\boost
