@@ -11,8 +11,9 @@ SameFilesFinder::SameFilesFinder(
         const size_t &blocksize,
         const hashtype_t &hashtype
         )
+    : m_blocksize(blocksize)
 {
-    createFileList(included, excluded, mask, level);
+    createFileList(included, excluded, mask, level, minsize);
 }
 
 void SameFilesFinder::printFileList(std::ostream &os)
@@ -29,7 +30,8 @@ void SameFilesFinder::createFileList(
         const filenames_t &included,
         const filenames_t &excluded,
         const mask_t &mask,
-        const level_t &level
+        const level_t &level,
+        const size_t &minsize
         )
 {
     pathconteiner_t includedPaths;
@@ -59,14 +61,14 @@ void SameFilesFinder::createFileList(
                     continue;
                 }
 
-                if (fileMaskMatched(entry, mask)) {
+                if (filtered(entry, mask, minsize)) {
                     m_fileList.push_back(entry);
                 }
             }
         } else {
             for (auto &entry : fs::directory_iterator(dir)) {
 
-                if (fileMaskMatched(entry, mask)) {
+                if (filtered(entry, mask, minsize)) {
                     m_fileList.push_back(entry);
                 }
 
@@ -84,15 +86,23 @@ bool SameFilesFinder::contains(
             != pathContainer.end();
 }
 
-bool SameFilesFinder::fileMaskMatched(
+bool SameFilesFinder::filtered(
         const path_t &pathEntry,
-        const mask_t &mask
+        const mask_t &mask,
+        const size_t &minsize
         )
 {
+    // check if path is a file
     if (!fs::is_regular_file(pathEntry)) {
         return false;
     }
 
+    // check if filesize >= minsize
+    if (fs::file_size(pathEntry) < minsize) {
+        return false;
+    }
+
+    // check if mask matched
     boost::smatch what;
     if (!boost::regex_match(pathEntry.filename().string(), what,
                             boost::regex(mask, boost::regex::icase))) {
@@ -144,6 +154,8 @@ void SameFilesFinder::printPathContainer(
         )
 {
     for (const auto &path : pathContainer) {
-        os << fs::canonical(path).string() << std::endl;
+        os << fs::canonical(path).string()
+           << " size: " << fs::file_size(path)
+           << std::endl;
     }
 }

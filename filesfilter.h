@@ -54,16 +54,22 @@ private:
 
     pathconteiner_t m_fileList;
     pathconteiner_t m_sameFiles;
+    size_t m_blocksize;
 
     void createFileList(
             const filenames_t &included,
             const filenames_t &excluded,
             const mask_t &mask,
-            const level_t &level
+            const level_t &level,
+            const size_t &minsize
             );
 
     bool contains(const pathconteiner_t &pathContainer, const path_t &pathEntry);
-    bool fileMaskMatched(const path_t &pathEntry, const mask_t &mask);
+    bool filtered(
+            const path_t &pathEntry,
+            const mask_t &mask,
+            const size_t &minsize
+            );
 
     void findSameFiles(const pathconteiner_t &filelist, size_t blockNumber);
     hash::Md5 hashOfFileBlock(const path_t &filename, size_t blockNumber);
