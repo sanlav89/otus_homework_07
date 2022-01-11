@@ -126,7 +126,7 @@ void SameFilesFinder::findSameFiles(
         return;
     }
 
-    std::map<hash::Md5, pathconteiner_t> map;
+    std::map<hash::Hash, pathconteiner_t> map;
     pathconteiner_t sameFiles;
     for (const auto &filename : filelist) {
         if (canCreateHash(filename, blockNumber)) {
@@ -143,6 +143,7 @@ void SameFilesFinder::findSameFiles(
     for (auto key : map) {
         if (key.second.size() > 1) {
             findSameFiles(key.second, blockNumber + 1);
+//            std::cout << "************ " <<  key.first.toString() << std::endl;
         }
     }
 }
@@ -152,7 +153,7 @@ bool SameFilesFinder::canCreateHash(const path_t &filename, size_t blockNumber)
     return blockNumber * m_blocksize < fs::file_size(filename);
 }
 
-hash::Md5 SameFilesFinder::hashOfFileBlock(
+hash::Hash SameFilesFinder::hashOfFileBlock(
         const path_t &filename,
         size_t blockNumber
         )
@@ -176,7 +177,7 @@ hash::Md5 SameFilesFinder::hashOfFileBlock(
         throw std::runtime_error("Error reading file " + filename.string());
     }
 
-    return hash::Md5(buffer.data(), m_blocksize);
+    return hash::Hash(buffer.data(), m_blocksize, m_hashalg);
 }
 
 void SameFilesFinder::printPathContainer(

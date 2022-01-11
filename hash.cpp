@@ -2,52 +2,42 @@
 
 using namespace hash;
 
-
-Md5::Md5(const void *buffer, std::size_t bytes)
+Hash::Hash(const void *buffer, std::size_t bytes, alg_t alg)
 {
-    calculate(buffer, bytes);
+    if (alg == AlgMd5) {
+        m_data.resize(sizeof(md5::digest_type));
+        calcuclateMd5(buffer, bytes, m_data.data());
+    } else {
+        m_data.resize(sizeof(uint32_t));
+        calcuclateCrc32(buffer, bytes, m_data.data());
+    }
 }
 
-Md5::Md5(const Md5 &other)
+Hash::Hash(const Hash &other) : m_data(other.m_data)
 {
-    std::memcpy(&m_value, &other.m_value, sizeof(md5::digest_type));
 }
 
-std::string Md5::toString() const
+std::string Hash::toString() const
 {
-    const auto charDigest = reinterpret_cast<const char *>(&m_value);
     std::string result;
-    boost::algorithm::hex(charDigest, charDigest + sizeof(md5::digest_type),
+    boost::algorithm::hex(m_data.data(), m_data.data() + m_data.size(),
                           std::back_inserter(result));
     return result;
 }
 
-void Md5::calculate(const void *buffer, std::size_t bytes)
+void Hash::calcuclateMd5(const void *ibuf, std::size_t bytes, void *obuf)
 {
     md5 hash;
-    hash.process_bytes(buffer, bytes);
-    hash.get_digest(m_value);
+    hash.process_bytes(ibuf, bytes);
+    md5::digest_type value;
+    hash.get_digest(value);
+    std::memcpy(obuf, value, sizeof(md5::digest_type));
 }
 
-Crc32::Crc32(const void *buffer, std::size_t bytes)
-{
-    calculate(buffer, bytes);
-}
-
-Crc32::Crc32(const Crc32 &other) : m_value(other.m_value) {}
-
-std::string Crc32::toString() const
-{
-    const auto charDigest = reinterpret_cast<const char *>(&m_value);
-    std::string result;
-    boost::algorithm::hex(charDigest, charDigest + sizeof(uint32_t),
-                          std::back_inserter(result));
-    return result;
-}
-
-void Crc32::calculate(const void *buffer, std::size_t bytes)
+void Hash::calcuclateCrc32(const void *ibuf, std::size_t bytes, void *obuf)
 {
     boost::crc_32_type crc32;
-    crc32.process_bytes(buffer, bytes);
-    m_value = crc32.checksum();
+    crc32.process_bytes(ibuf, bytes);
+    auto value = crc32.checksum();
+    std::memcpy(obuf, &value, sizeof(value));
 }

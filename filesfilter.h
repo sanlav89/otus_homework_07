@@ -75,7 +75,7 @@ private:
 
     bool canCreateHash(const path_t &filename, size_t blockNumber);
 
-    hash::Md5 hashOfFileBlock(const path_t &filename, size_t blockNumber);
+    hash::Hash hashOfFileBlock(const path_t &filename, size_t blockNumber);
 
     static void printPathContainer(
             const pathconteiner_t &pathContainer,
