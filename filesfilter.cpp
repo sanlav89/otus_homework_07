@@ -102,6 +102,42 @@ bool SameFilesFinder::fileMaskMatched(
     return true;
 }
 
+void SameFilesFinder::findSameFiles(
+        const pathconteiner_t &filelist,
+        size_t blockNumber
+        )
+{
+    std::map<hash::Md5, path_t> map;
+    for (const auto &filename : filelist) {
+        map[hashOfFileBlock(filename, blockNumber)] = filename;
+    }
+
+    pathconteiner_t nextFileList;
+    auto iter = map.begin();
+    auto prev = (*iter).first;
+    iter++;
+    nextFileList.push_back((*iter).second);
+    while (iter != map.end()) {
+        if ((*iter).first != prev) {
+            if (nextFileList.size() > 1) {
+                findSameFiles(nextFileList, blockNumber + 1);
+            }
+            nextFileList.clear();
+        }
+        prev = (*iter).first;
+        nextFileList.push_back((*iter).second);
+        iter++;
+    }
+}
+
+hash::Md5 SameFilesFinder::hashOfFileBlock(
+        const path_t &filename,
+        size_t blockNumber
+        )
+{
+
+}
+
 void SameFilesFinder::printPathContainer(
         const pathconteiner_t &pathContainer,
         std::ostream &os

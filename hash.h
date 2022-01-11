@@ -28,6 +28,8 @@ public:
     std::string toString() const override;
 
     friend inline bool operator<(const Md5 &first, const Md5 &second);
+    friend inline bool operator==(const Md5 &first, const Md5 &second);
+    friend inline bool operator!=(const Md5 &first, const Md5 &second);
 
 private:
 
@@ -70,6 +72,16 @@ inline bool operator<(const Md5 &first, const Md5 &second)
         }
     }
     return false;
+}
+
+inline bool operator==(const Md5 &first, const Md5 &second)
+{
+    return std::memcmp(first.m_value, second.m_value, sizeof(md5::digest_type)) == 0;
+}
+
+inline bool operator!=(const Md5 &first, const Md5 &second)
+{
+    return !(first == second);
 }
 
 inline bool operator<(const Crc32 &first, const Crc32 &second)
