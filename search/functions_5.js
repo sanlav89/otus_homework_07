@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['samefilesfinder_0',['SameFilesFinder',['../classfilesfilter_1_1_same_files_finder.html#a3a376a3de8dd3ac9dc5a0e6cba027756',1,'filesfilter::SameFilesFinder']]],
-  ['set_1',['set',['../_c_make_lists_8txt.html#a4584efe1db04bd057a83dd0089cb0c5b',1,'CMakeLists.txt']]]
+  ['operator_21_3d_0',['operator!=',['../namespacehash.html#a942a67877c64deffc76c3dc04fc1e836',1,'hash']]],
+  ['operator_3c_1',['operator&lt;',['../namespacehash.html#a92ae605d3a1a9166cefcadb900ea8e2c',1,'hash']]],
+  ['operator_3d_3d_2',['operator==',['../namespacehash.html#aa7d2cf29b94fef8f4ce02790888dc54c',1,'hash']]]
 ];

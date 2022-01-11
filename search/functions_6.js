@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tostring_0',['toString',['../classhash_1_1_hash.html#a5b3d7d649a8130ecfb6967c93b627b21',1,'hash::Hash']]]
+  ['printfilelist_0',['printFileList',['../classfilesfilter_1_1_same_files_finder.html#a39b709b3608e602ffb53ab52d6af91b8',1,'filesfilter::SameFilesFinder']]],
+  ['printsamefiles_1',['printSameFiles',['../classfilesfilter_1_1_same_files_finder.html#af5883f6f79353812a30f6bb2ef55544a',1,'filesfilter::SameFilesFinder']]]
 ];

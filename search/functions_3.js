@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['operator_21_3d_0',['operator!=',['../namespacehash.html#a942a67877c64deffc76c3dc04fc1e836',1,'hash']]],
-  ['operator_3c_1',['operator&lt;',['../namespacehash.html#a92ae605d3a1a9166cefcadb900ea8e2c',1,'hash']]],
-  ['operator_3d_3d_2',['operator==',['../namespacehash.html#aa7d2cf29b94fef8f4ce02790888dc54c',1,'hash']]]
+  ['hash_0',['Hash',['../classhash_1_1_hash.html#a43552a6d02f649c3b4610a1c5f10c21d',1,'hash::Hash::Hash()=default'],['../classhash_1_1_hash.html#ac1ceaf6a9f5b9fa73c2e6e7ef8894ffa',1,'hash::Hash::Hash(const void *buffer, std::size_t bytes, alg_t alg=AlgMd5)'],['../classhash_1_1_hash.html#a0dabddca4882b6869a7cd3d130e9aad2',1,'hash::Hash::Hash(const Hash &amp;other)']]]
 ];
