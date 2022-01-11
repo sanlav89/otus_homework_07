@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#ac0f2228420376f4db7e1274f2b41667c',1,'main.cpp']]],
-  ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]]
+  ['filenames_5ft_0',['filenames_t',['../namespacefilesfilter.html#a5f20b9c021a2a0cb6c62c674af34b34e',1,'filesfilter']]],
+  ['filesfilter_1',['filesfilter',['../namespacefilesfilter.html',1,'']]],
+  ['filesfilter_2ecpp_2',['filesfilter.cpp',['../filesfilter_8cpp.html',1,'']]],
+  ['filesfilter_2eh_3',['filesfilter.h',['../filesfilter_8h.html',1,'']]]
 ];

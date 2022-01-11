@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['readme_2emd_0',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]]
+  ['install_5fmanifest_2etxt_0',['install_manifest.txt',['../install__manifest_8txt.html',1,'']]]
 ];
