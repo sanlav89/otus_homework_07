@@ -31,6 +31,16 @@ void SameFilesFinder::printSameFiles(std::ostream &os)
     }
 }
 
+pathconteiner_t SameFilesFinder::fileList() const
+{
+    return m_fileList;
+}
+
+std::list<pathconteiner_t> SameFilesFinder::sameFilesGroups() const
+{
+    return m_sameFilesGroups;
+}
+
 void SameFilesFinder::createFileList(
         const filenames_t &included,
         const filenames_t &excluded,
