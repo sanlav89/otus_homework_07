@@ -1,0 +1,4 @@
+# BOOST_ROOT          D:\boost
+# BOOST_INCLUDEDIR    D:\boost\include\boost-1_78
+# BOOST_LIBRARYDIR    D:\boost\lib
+# https://stackoverflow.com/questions/20969280/find-package-doesnt-detect-boost-on-windows-cmake
