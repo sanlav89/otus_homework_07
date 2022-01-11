@@ -1,4 +1,5 @@
 #include "filesfilter.h"
+#include <cassert>
 
 using namespace filesfilter;
 
@@ -14,6 +15,7 @@ SameFilesFinder::SameFilesFinder(
     : m_blocksize(blocksize)
 {
     createFileList(included, excluded, mask, level, minsize);
+    findSameFiles(m_fileList, 0);
 }
 
 void SameFilesFinder::printFileList(std::ostream &os)
@@ -23,7 +25,9 @@ void SameFilesFinder::printFileList(std::ostream &os)
 
 void SameFilesFinder::printSameFiles(std::ostream &os)
 {
-    printPathContainer(m_sameFiles, os);
+    for (const auto &group : m_sameFilesGroups) {
+        printPathContainer(group, os);
+    }
 }
 
 void SameFilesFinder::createFileList(
@@ -117,27 +121,30 @@ void SameFilesFinder::findSameFiles(
         size_t blockNumber
         )
 {
-    std::map<hash::Md5, path_t> map;
+    std::map<hash::Md5, pathconteiner_t> map;
+    pathconteiner_t sameFiles;
     for (const auto &filename : filelist) {
-        map[hashOfFileBlock(filename, blockNumber)] = filename;
+        if (canCreateHash(filename, blockNumber)) {
+            map[hashOfFileBlock(filename, blockNumber)].push_back(filename);
+        } else {
+            sameFiles.push_back(filename);
+        }
     }
 
-    pathconteiner_t nextFileList;
-    auto iter = map.begin();
-    auto prev = (*iter).first;
-    iter++;
-    nextFileList.push_back((*iter).second);
-    while (iter != map.end()) {
-        if ((*iter).first != prev) {
-            if (nextFileList.size() > 1) {
-                findSameFiles(nextFileList, blockNumber + 1);
-            }
-            nextFileList.clear();
-        }
-        prev = (*iter).first;
-        nextFileList.push_back((*iter).second);
-        iter++;
+    if (sameFiles.size() > 1) {
+        m_sameFilesGroups.push_back(sameFiles);
     }
+
+    for (auto key : map) {
+        if (key.second.size() > 1) {
+            findSameFiles(key.second, blockNumber + 1);
+        }
+    }
+}
+
+bool SameFilesFinder::canCreateHash(const path_t &filename, size_t blockNumber)
+{
+    return blockNumber * m_blocksize < fs::file_size(filename);
 }
 
 hash::Md5 SameFilesFinder::hashOfFileBlock(
@@ -145,7 +152,26 @@ hash::Md5 SameFilesFinder::hashOfFileBlock(
         size_t blockNumber
         )
 {
+    assert(blockNumber * m_blocksize <= fs::file_size(filename));
 
+    // fstream settings
+    std::ifstream file(filename.string(), std::ios::binary | std::ios::ate);
+    file.seekg(blockNumber * m_blocksize, std::ios::beg);
+    std::vector<char> buffer(m_blocksize);
+    auto size = m_blocksize;
+
+    // if last part is not multiple, set to zero the tail of block
+    if ((blockNumber + 1) * m_blocksize > fs::file_size(filename)) {
+        size = fs::file_size(filename) - blockNumber * m_blocksize;
+        std::memset(buffer.data(), 0, m_blocksize);
+    }
+
+    // Read data to buffer
+    if (!file.read(buffer.data(), size)) {
+        throw std::runtime_error("Error reading file " + filename.string());
+    }
+
+    return hash::Md5(buffer.data(), m_blocksize);
 }
 
 void SameFilesFinder::printPathContainer(
@@ -158,4 +184,5 @@ void SameFilesFinder::printPathContainer(
            << " size: " << fs::file_size(path)
            << std::endl;
     }
+    os << std::endl;
 }

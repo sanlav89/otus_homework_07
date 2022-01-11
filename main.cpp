@@ -45,9 +45,13 @@ int main(int argc, const char *argv[])
 //            std::cout << filename << std::endl;
 //        }
 
-        ff::SameFilesFinder(included, excluded, mask, static_cast<ff::level_t>(level),
-                            minsize, blocksize, static_cast<ff::hashtype_t>(hashtype)
-                           ).printFileList();
+        ff::SameFilesFinder scanner(
+                    included, excluded, mask, static_cast<ff::level_t>(level),
+                    minsize, blocksize, static_cast<ff::hashtype_t>(hashtype)
+                    );
+
+        scanner.printFileList();
+        scanner.printSameFiles();
 
 //        filelist::FileListCreator fl(dirs);
 

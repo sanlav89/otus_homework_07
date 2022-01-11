@@ -3,6 +3,7 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <unordered_map>
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -53,7 +54,7 @@ public:
 private:
 
     pathconteiner_t m_fileList;
-    pathconteiner_t m_sameFiles;
+    std::list<pathconteiner_t> m_sameFilesGroups;
     size_t m_blocksize;
 
     void createFileList(
@@ -64,7 +65,11 @@ private:
             const size_t &minsize
             );
 
-    bool contains(const pathconteiner_t &pathContainer, const path_t &pathEntry);
+    bool contains(
+            const pathconteiner_t &pathContainer,
+            const path_t &pathEntry
+            );
+
     bool filtered(
             const path_t &pathEntry,
             const mask_t &mask,
@@ -72,9 +77,15 @@ private:
             );
 
     void findSameFiles(const pathconteiner_t &filelist, size_t blockNumber);
+
+    bool canCreateHash(const path_t &filename, size_t blockNumber);
+
     hash::Md5 hashOfFileBlock(const path_t &filename, size_t blockNumber);
 
-    static void printPathContainer(const pathconteiner_t &pathContainer, std::ostream &os = std::cout);
+    static void printPathContainer(
+            const pathconteiner_t &pathContainer,
+            std::ostream &os = std::cout
+            );
 
 };
 
