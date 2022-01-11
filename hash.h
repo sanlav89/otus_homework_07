@@ -1,13 +1,52 @@
 #pragma once
 
 #include <cstring>
+#include <vector>
 #include <boost/uuid/detail/md5.hpp>
 #include <boost/crc.hpp>
 #include <boost/algorithm/hex.hpp>
 
 namespace hash {
 
+enum HashType {
+    AlgMd5,
+    AlgCrc32
+};
+
+using alg_t = HashType;
+using byte_t = char;
+
 using boost::uuids::detail::md5;
+
+class IHashCalculator
+{
+    virtual void calculate(const void *ibuf, std::size_t bytes, void *obuf) = 0;
+};
+
+class Md5Calculator : public IHashCalculator
+{
+public:
+    void calculate(const void *ibuf, std::size_t bytes, void *obuf) override
+    {
+        md5 hash;
+        hash.process_bytes(ibuf, bytes);
+        md5::digest_type value;
+        hash.get_digest(value);
+        std::memcpy(obuf, value, sizeof(md5::digest_type));
+    }
+};
+
+class Crc32Calculator : public IHashCalculator
+{
+public:
+    void calculate(const void *ibuf, std::size_t bytes, void *obuf) override
+    {
+        boost::crc_32_type crc32;
+        crc32.process_bytes(ibuf, bytes);
+        auto value = crc32.checksum();
+        std::memcpy(obuf, &value, sizeof(value));
+    }
+};
 
 class IHash
 {

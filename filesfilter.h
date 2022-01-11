@@ -27,13 +27,7 @@ enum ScanLevel {
     All
 };
 
-enum HashType {
-    Md5,
-    Crc32
-};
-
 using level_t = ScanLevel;
-using hashtype_t = HashType;
 
 class SameFilesFinder
 {
@@ -45,7 +39,7 @@ public:
             const level_t &level,
             const size_t &minsize,
             const size_t &blocksize,
-            const hashtype_t &hashtype
+            const hash::alg_t &hashalg
             );
 
     void printFileList(std::ostream &os = std::cout);
@@ -56,6 +50,7 @@ private:
     pathconteiner_t m_fileList;
     std::list<pathconteiner_t> m_sameFilesGroups;
     size_t m_blocksize;
+    hash::alg_t m_hashalg;
 
     void createFileList(
             const filenames_t &included,

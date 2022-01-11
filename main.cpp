@@ -28,7 +28,7 @@ int main(int argc, const char *argv[])
                 ("mask,m", po::value<ff::mask_t>(&mask)->composing()->default_value(".*"), "regex: masks of files")
                 ("minsize,s", po::value<size_t>(&minsize)->default_value(1), "minimal size of file")
                 ("blocksize,b", po::value<size_t>(&blocksize)->default_value(1), "compare block size")
-                ("hashtype,t", po::value<size_t>(&hashtype)->default_value(ff::Md5), "hash type: 0 - md5, 1 - crc32")
+                ("hashtype,t", po::value<size_t>(&hashtype)->default_value(hash::AlgMd5), "hash type: 0 - md5, 1 - crc32")
                 ;
 
         po::variables_map vm;
@@ -47,7 +47,7 @@ int main(int argc, const char *argv[])
 
         ff::SameFilesFinder scanner(
                     included, excluded, mask, static_cast<ff::level_t>(level),
-                    minsize, blocksize, static_cast<ff::hashtype_t>(hashtype)
+                    minsize, blocksize, static_cast<hash::alg_t>(hashtype)
                     );
 
         scanner.printFileList();

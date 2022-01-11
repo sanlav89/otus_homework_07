@@ -10,9 +10,10 @@ SameFilesFinder::SameFilesFinder(
         const level_t &level,
         const size_t &minsize,
         const size_t &blocksize,
-        const hashtype_t &hashtype
+        const hash::alg_t &hashalg
         )
     : m_blocksize(blocksize)
+    , m_hashalg(hashalg)
 {
     createFileList(included, excluded, mask, level, minsize);
     findSameFiles(m_fileList, 0);
@@ -58,7 +59,7 @@ void SameFilesFinder::createFileList(
         }
 
         if (level == All) {
-            for (auto &entry : fs::recursive_directory_iterator(dir)) {
+            for (const auto &entry : fs::recursive_directory_iterator(dir)) {
 
                 // watch if entry is in excluded list
                 if (contains(excludedPaths, dir)) {
@@ -70,7 +71,7 @@ void SameFilesFinder::createFileList(
                 }
             }
         } else {
-            for (auto &entry : fs::directory_iterator(dir)) {
+            for (const auto &entry : fs::directory_iterator(dir)) {
 
                 if (filtered(entry, mask, minsize)) {
                     m_fileList.push_back(entry);
@@ -121,6 +122,10 @@ void SameFilesFinder::findSameFiles(
         size_t blockNumber
         )
 {
+    if (filelist.size() <= 1) {
+        return;
+    }
+
     std::map<hash::Md5, pathconteiner_t> map;
     pathconteiner_t sameFiles;
     for (const auto &filename : filelist) {
