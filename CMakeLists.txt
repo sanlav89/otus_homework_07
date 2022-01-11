@@ -35,12 +35,14 @@ set (
 
 # EXECUTABLE
 add_executable(bayan main.cpp ${SOURCES} ${HEADERS})
-add_executable(tests tests.cpp ${SOURCES} ${HEADERS})
+add_executable(test_hash test_hash.cpp hash.cpp)
+add_executable(test_samefilesfinder test_samefilesfinder.cpp ${SOURCES} ${HEADERS})
 
 # PROPERTIES
 set_target_properties (
     bayan
-    tests
+    test_hash
+    test_samefilesfinder
         PROPERTIES
             CMAKE_CXX_STANDARD 17
             CMAKE_CXX_STANDARD_REQUIRED ON
@@ -56,7 +58,11 @@ target_link_libraries(
         ${Boost_REGEX_LIBRARY}
         )
 target_link_libraries(
-    tests
+    test_hash
+        ${Boost_LIBRARIES}
+        )
+target_link_libraries(
+    test_samefilesfinder
         ${Boost_LIBRARIES}
         ${Boost_FILESYSTEM_LIBRARY}
         ${Boost_REGEX_LIBRARY}
@@ -68,14 +74,20 @@ if (MSVC)
     target_compile_options(bayan PRIVATE
         /W4
     )
-    target_compile_options(tests PRIVATE
+    target_compile_options(test_hash PRIVATE
+        /W4
+    )
+    target_compile_options(test_samefilesfinder PRIVATE
         /W4
     )
 else ()
     target_compile_options(bayan PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
-    target_compile_options(tests PRIVATE
+    target_compile_options(test_hash PRIVATE
+        -Wall -Wextra -pedantic -Werror
+    )
+    target_compile_options(test_samefilesfinder PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
 endif()
@@ -91,4 +103,5 @@ include(CPack)
 
 ### UNIT-tests
 enable_testing()
-add_test(tests tests)
+add_test(test_hash test_samefilesfinder)
+add_test(test_samefilesfinder test_samefilesfinder)

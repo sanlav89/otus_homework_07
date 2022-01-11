@@ -29,6 +29,16 @@ enum ScanLevel {
 
 using level_t = ScanLevel;
 
+namespace def {
+const filenames_t Included = {"./"};
+const filenames_t Excluded = {};
+const level_t Level = Current;
+const mask_t Mask = ".*";
+const size_t Minsize = 1;
+const size_t Blocksize = 1;
+const hash::alg_t Alg = hash::AlgMd5;
+}
+
 class SameFilesFinder
 {
 public:
@@ -44,6 +54,10 @@ public:
 
     void printFileList(std::ostream &os = std::cout);
     void printSameFiles(std::ostream &os = std::cout);
+
+    pathconteiner_t fileList() const;
+
+    std::list<pathconteiner_t> sameFilesGroups() const;
 
 private:
 

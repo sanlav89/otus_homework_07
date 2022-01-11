@@ -16,7 +16,7 @@ enum HashAlg {
 };
 
 using alg_t = HashAlg;
-using byte_t = char;
+using byte_t = uint8_t;
 
 class Hash
 {
