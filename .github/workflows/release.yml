@@ -14,9 +14,9 @@ jobs:
         with:
           submodules: true
       - run: sudo apt-get update -y
-      - run: sudo apt-get install libboost-program-options-dev 
-      - run: sudo apt-get install libboost-filesystem-dev
-      - run: sudo apt-get install libboost-regex-dev
+      - run: sudo apt-get install libboost-program-options-dev -y
+      - run: sudo apt-get install libboost-filesystem-dev -y
+      - run: sudo apt-get install libboost-regex-dev -y
       - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
       - run: cmake --build .
 #      - run: cmake --build . --target test
