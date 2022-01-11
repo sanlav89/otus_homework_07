@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tostring_0',['toString',['../classhash_1_1_md5.html#ae0ff5a14cb82d71a41bc7d09cea995e7',1,'hash::Md5::toString()'],['../classhash_1_1_crc32.html#aa13d8db5f87d23f9fd6dd801124dd026',1,'hash::Crc32::toString()']]]
+  ['samefilesfinder_0',['SameFilesFinder',['../classfilesfilter_1_1_same_files_finder.html#a3a376a3de8dd3ac9dc5a0e6cba027756',1,'filesfilter::SameFilesFinder']]],
+  ['set_1',['set',['../_c_make_lists_8txt.html#a4584efe1db04bd057a83dd0089cb0c5b',1,'CMakeLists.txt']]]
 ];

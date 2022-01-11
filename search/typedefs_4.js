@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['path_5ft_0',['path_t',['../namespacefilesfilter.html#aa267b8940b79355ad18084cad68d0c9e',1,'filesfilter']]],
-  ['pathconteiner_5ft_1',['pathconteiner_t',['../namespacefilesfilter.html#a53839454e2b9f78810fad62a7a44299b',1,'filesfilter']]]
+  ['mask_5ft_0',['mask_t',['../namespacefilesfilter.html#ad852172e73d1af683df2a028b625d7e3',1,'filesfilter']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['samefilesfinder_0',['SameFilesFinder',['../classfilesfilter_1_1_same_files_finder.html#a04f462dfbb31fdfbe6b38b710a9f7d9b',1,'filesfilter::SameFilesFinder']]],
-  ['set_1',['set',['../_c_make_lists_8txt.html#a4584efe1db04bd057a83dd0089cb0c5b',1,'CMakeLists.txt']]]
+  ['printfilelist_0',['printFileList',['../classfilesfilter_1_1_same_files_finder.html#a39b709b3608e602ffb53ab52d6af91b8',1,'filesfilter::SameFilesFinder']]],
+  ['printsamefiles_1',['printSameFiles',['../classfilesfilter_1_1_same_files_finder.html#af5883f6f79353812a30f6bb2ef55544a',1,'filesfilter::SameFilesFinder']]]
 ];

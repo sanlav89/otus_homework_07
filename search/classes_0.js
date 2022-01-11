@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['crc32_0',['Crc32',['../classhash_1_1_crc32.html',1,'hash']]]
+  ['hash_0',['Hash',['../classhash_1_1_hash.html',1,'hash']]]
 ];

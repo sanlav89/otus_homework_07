@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ihash_0',['IHash',['../classhash_1_1_i_hash.html',1,'hash']]]
+  ['samefilesfinder_0',['SameFilesFinder',['../classfilesfilter_1_1_same_files_finder.html',1,'filesfilter']]]
 ];
