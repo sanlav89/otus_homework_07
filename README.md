@@ -104,7 +104,7 @@ $ cmake --build .. --target test
 $ cmake --build .. --target package  
 ```  
   
-2. [Запуск](#run)  
+2. Запуск  
 ```bash  
 $ ./bayan -i ../otus_homework_07/_test_folder/ -l 1  
 /home/OTUS/otus_homework_07/_test_folder/dir1/dir3/dir4/dublicate_3_4.txt  
