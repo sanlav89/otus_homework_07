@@ -65,10 +65,69 @@ $ bayan [...]
 ## Описание работы программы <a name="prog_description"></a>  
 
 ### Краткое описание <a name="comments"></a>  
-
+Программа bayan - утилита командной строки, которая позволяет найти группы дубликатов файлов. 
+|Параметр|Значение по умолчанию|Описание|
+|--------|---------------------|--------|
+|help(h)||Вызов краткой сводки поддерживаемых параметров|
+|incdir(i)|./|Директория для сканирования|
+|excdir(e)|(пустой список)|Директория для исключения из сканирования|
+|level(l)|0|Уровень сканирования (0 - не сканировать вложения, 1 - сканировать вложения)|
+|mask(m)|.\*|Маска сканирования в формате регулярного выражения: ".\*part1.\*part2.\*part3.\*"|
+|minsize(s)|1|Минимальный размер файлов|
+|blocksize(b)|1|Размер блока, по которому производится четние каждого файла|
+|hashtype(t)|0|Алгоритм хэширования читаемого из файла блока: 0 - MD5, 1 - CRC32|  
+  
+Пример вызова:  
+```bash  
+$ bayan -i ./ -i ../ -e ./subdir --level=1 -m .*txt --minsize=0 -b 128 -t 1  
+```  
+  
+Алгоритм программы.  
+1. Фильтр входных параметров.  
+ - Если в какой-либо комбинации опций есть высоз справки (--help или -h), то будет выполнен только вызов справки.  
+ - Если не указано ниодной директории для сканирования (опция -i), то по умолчанию выполнится сканирование текущей директории.  
+ - При попытке указать минимальный размер блока (опция -b) < 1, сканирование выполнится с данный параметром по умолчанию.  
+2. На основании параметров incdir, excdir, level, mask, minsize формируется список файлов для сканирования. Описание функции, выполняющей эту часть алгоритма, здесь.  
+3. Формирование групп файлов-дубликатов. Рекурсивное поблочное чтение файлов из списка с хэшированием. Описание функции, выполняющей эту часть алгоритма, здесь.  
+  
+  
 ### Сборка и запуск <a name="build"></a>  
-
+  
+1. Сборка  
+```bash  
+$ cd <otus_homework_01_dir>  
+$ mkdir ../build  
+$ cd ../build  
+$ cmake . -DPATCH_VERSION=123  
+$ cmake --build ..  
+$ cmake --build .. --target test  
+$ cmake --build .. --target package  
+```  
+  
+2. [Запуск](#run)  
+```bash  
+$ ./bayan -i ../otus_homework_07/_test_folder/ -l 1  
+D:\WORK\OTUS\otus_homework_07\_test_folder\dir1\dir3\dir4\dublicate_3_4.txt  
+D:\WORK\OTUS\otus_homework_07\_test_folder\dir1\dir3\dublicate_3_3.txt  
+D:\WORK\OTUS\otus_homework_07\_test_folder\dir1\dublicate_3_1.txt  
+D:\WORK\OTUS\otus_homework_07\_test_folder\dir2\dublicate_3_2.txt  
+                                                                   
+D:\WORK\OTUS\otus_homework_07\_test_folder\dir1\dublicate_2_1.txt  
+D:\WORK\OTUS\otus_homework_07\_test_folder\dir2\dublicate_2_2.txt  
+                                                                   
+D:\WORK\OTUS\otus_homework_07\_test_folder\dir1\dublicate_1_1.txt  
+D:\WORK\OTUS\otus_homework_07\_test_folder\dir2\dublicate_1_2.txt  
+```  
 ### Тестирование <a name="testing"></a>  
   
+Для тестирования создана директория с тестовыми (otus_homework_07/_test_folder) файлами и несколькими вложенными директориями. Для простоты все тестовые файлы имеют расширение ".\*txt". Формат названия для файлов, являющихся дубликатами:  
+dublicate_(GROUP)_(NUMBER).txt ,  
+где GROUP - номер порядковый номер группы дубликатов, NUMBER - порядковый номер файла внутри группы.  
+Формат названия для файлов, не явзяющихся дубликаоами:  
+nondublicate_(NUMBER).txt ,  
+где NUMBER - порядковый номер файла.  
+Здесь <a name="run"></a> Пример теста, который выводит все группы дубликатов файлов, находящихся в директории otus_homework_07/_test_folder.  
+Другие тесты, использующие эти тестовые данные, выполнены [здесь](https://github.com/sanlav89/otus_homework_07/blob/master/test_samefilesfinder.cpp).  
+Также выполнены [unit-тесты](https://github.com/sanlav89/otus_homework_07/blob/master/test_hash.cpp) алгоритмов хэширования  
   
   

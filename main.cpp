@@ -41,6 +41,10 @@ int main(int argc, const char *argv[])
                 included = def::Included;
             }
 
+            if (blocksize < def::Blocksize) {
+                blocksize = def::Blocksize;
+            }
+
             ff::SameFilesFinder scanner(
                         included, excluded, mask, static_cast<ff::level_t>(level),
                         minsize, blocksize, static_cast<hash::alg_t>(hashtype)

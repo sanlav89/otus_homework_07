@@ -197,7 +197,7 @@ void SameFilesFinder::printPathContainer(
 {
     for (const auto &path : pathContainer) {
         os << fs::canonical(path).string()
-           << " size: " << fs::file_size(path)
+//           << " size: " << fs::file_size(path)
            << std::endl;
     }
     os << std::endl;
