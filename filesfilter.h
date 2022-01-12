@@ -47,7 +47,7 @@ public:
      * @brief При создании SameFilesFinder выполняется алгоритм поиска дубликатов, который состоит из двух этапов:
      *
      * 1. Формирование списка файлов для сравнения (createFileList()).
-     * Алгоритм createFileList():
+     * Алгоритм createFileList():<br>
      *
      * 1) Преобразование списков included, excluded в формат boost::filesystem::path (path_t)
      *
