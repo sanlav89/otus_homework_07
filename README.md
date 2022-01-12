@@ -131,8 +131,7 @@ $ ./bayan -i ../otus_homework_07/_test_folder/ -l 1
   
 где *NUMBER* - порядковый номер файла.  
   
-#### Пример теста <a name="run"></a>,  
-который выводит все группы дубликатов файлов, находящихся в директории otus_homework_07/_test_folder.  
+[Пример теста](https://github.com/sanlav89/otus_homework_07#build), который выводит все группы дубликатов файлов, находящихся в директории otus_homework_07/_test_folder.  
   
 Другие тесты, использующие эти тестовые данные, выполнены [здесь](https://github.com/sanlav89/otus_homework_07/blob/master/test_samefilesfinder.cpp).  
   
