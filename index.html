@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>bayan: Задание 7 - bayan</title>
+<title>bayan: Домашняя работа №7. Изучение возможностей библиотеки BOOST</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,12 +62,25 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Задание 7 - bayan </div></div>
+  <div class="headertitle"><div class="title">Домашняя работа №7. Изучение возможностей библиотеки BOOST </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a></p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a></p><ol type="1">
+<li><a href="#task">Задание</a> <br  />
+ 1.1 <a href="#task_description">Условие</a> <br  />
+ 1.2 <a href="#selfcontrol">Самоконтроль</a> <br  />
+ 1.3 <a href="#checking">Проверка</a> <br  />
+</li>
+<li><a href="#prog_description">Описание работы программы</a> <br  />
+ 2.1 <a href="#comments">Краткое описание</a> <br  />
+ 2.2 <a href="#build">Сборка и запуск</a> <br  />
+ 2.3 <a href="#testing">Тестирование</a> <br  />
+</li>
+</ol>
 <h1><a class="anchor" id="autotoc_md1"></a>
-Условие</h1>
+Задание 7 - bayan &lt;a name="task"&gt;&lt;/a&gt;</h1>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Условие &lt;a name="task_description"&gt;&lt;/a&gt;</h2>
 <p >Пользуясь имеющимися в библиотеке Boost структурами и алгоритмами разработать утилиту для обнаружения файлов-дубликатов. Утилита должна иметь возможность через параметры командной строки указывать <br  />
  • директории для сканирования (может быть несколько) <br  />
  • директории для исключения из сканирования (может быть несколько) <br  />
@@ -103,8 +116,8 @@ $(function() {
  Порядок сравнения этих файлов должен быть максимально бережным. То есть обработка первого файла world.txt вообще не приводит к чтению с диска, ведь нам еще не с чем сравнивать. Как только мы добираемся до файла cpp.txt только в этот момент происходит перое чтение первого блока обоих файлов. В данном случае блоки идентичны, и необходимо прочесть вторые блоки, которые уже различаются. Файлы различны, оставшиеся данные не читаются. <br  />
  Файлы считаются идентичными при полном совпадении последовательности хешей блоков. <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md2"></a>
-Самоконтроль</h1>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Самоконтроль &lt;a name="selfcontrol"&gt;&lt;/a&gt;</h2>
 <p >• блок файла читается с диска не более одного раза <br  />
  • блок файла читается только в случае необходимости <br  />
  • не забыть, что дубликатов может быть больше чем два <br  />
@@ -112,12 +125,100 @@ $(function() {
  • описание параметров в файле <a class="el" href="_r_e_a_d_m_e_8md.html">README.md</a> корне репозитория <br  />
  • отправлена на проверку ссылка на страницу репозитория <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md3"></a>
-Проверка</h1>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Проверка &lt;a name="checking"&gt;&lt;/a&gt;</h2>
 <p >Задание считается выполнено успешно, если после просмотра кода, подключения репозитория, установки пакета и запуска бинарного файла командой (параметры из описания): <br  />
  </p><div class="fragment"><div class="line">$ bayan [...]  </div>
 </div><!-- fragment --><p> будут обнаружены файлы-дубликаты, без ложных срабатываний и пропуска существующих дубликатов. <br  />
  Количество прочитанных данных с диска минимально. <br  />
+</p>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Описание работы программы &lt;a name="prog_description"&gt;&lt;/a&gt;</h1>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Краткое описание &lt;a name="comments"&gt;&lt;/a&gt;</h2>
+<p >Программа bayan - утилита командной строки, которая позволяет найти группы дубликатов файлов. </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Параметр   </th><th class="markdownTableHeadNone">Значение по умолчанию   </th><th class="markdownTableHeadNone">Описание    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone" colspan="2">help(h)   </td><td class="markdownTableBodyNone">Вызов краткой сводки поддерживаемых параметров    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">incdir(i)   </td><td class="markdownTableBodyNone">./   </td><td class="markdownTableBodyNone">Директория для сканирования    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">excdir(e)   </td><td class="markdownTableBodyNone">(пустой список)   </td><td class="markdownTableBodyNone">Директория для исключения из сканирования    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">level(l)   </td><td class="markdownTableBodyNone">0   </td><td class="markdownTableBodyNone">Уровень сканирования (0 - не сканировать вложения, 1 - сканировать вложения)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">mask(m)   </td><td class="markdownTableBodyNone">.*   </td><td class="markdownTableBodyNone">Маска сканирования в формате регулярного выражения: ".\*part1.\*part2.\*part3.\*"    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">minsize(s)   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">Минимальный размер файлов    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">blocksize(b)   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">Размер блока, по которому производится четние каждого файла    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">hashtype(t)   </td><td class="markdownTableBodyNone">0   </td><td class="markdownTableBodyNone">Алгоритм хэширования читаемого из файла блока: 0 - MD5, 1 - CRC32   </td></tr>
+</table>
+<p >Пример вызова: <br  />
+ </p><div class="fragment"><div class="line">$ bayan -i ./ -i ../ -e ./subdir --level=1 -m .*txt --minsize=0 -b 128 -t 1  </div>
+</div><!-- fragment --><p >Алгоритм программы. <br  />
+</p><ol type="1">
+<li>Фильтр входных параметров. <br  />
+<ul>
+<li>Если в какой-либо комбинации опций есть высоз справки (&ndash;help или -h), то будет выполнен только вызов справки. <br  />
+</li>
+<li>Если не указано ниодной директории для сканирования (опция -i), то по умолчанию выполнится сканирование текущей директории. <br  />
+</li>
+<li>При попытке указать минимальный размер блока (опция -b) &lt; 1, сканирование выполнится с данный параметром по умолчанию. <br  />
+</li>
+</ul>
+</li>
+<li>На основании параметров incdir, excdir, level, mask, minsize формируется список файлов для сканирования. Описание функции, выполняющей эту часть алгоритма, здесь. <br  />
+</li>
+<li>Формирование групп файлов-дубликатов (используюься параметры blocksize, hashtype). Рекурсивное поблочное чтение файлов из списка с хэшированием. Описание функции, выполняющей эту часть алгоритма, здесь. <br  />
+</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Сборка и запуск &lt;a name="build"&gt;&lt;/a&gt;</h2>
+<ol type="1">
+<li>Сборка <br  />
+ <div class="fragment"><div class="line">$ cd &lt;otus_homework_01_dir&gt;  </div>
+<div class="line">$ mkdir ../build  </div>
+<div class="line">$ cd ../build  </div>
+<div class="line">$ cmake . -DPATCH_VERSION=123  </div>
+<div class="line">$ cmake --build ..  </div>
+<div class="line">$ cmake --build .. --target test  </div>
+<div class="line">$ cmake --build .. --target package  </div>
+</div><!-- fragment --></li>
+<li><a href="#run">Запуск</a> <br  />
+ <div class="fragment"><div class="line">$ ./bayan -i ../otus_homework_07/_test_folder/ -l 1  </div>
+<div class="line">/home/OTUS/otus_homework_07/_test_folder/dir1/dir3/dir4/dublicate_3_4.txt  </div>
+<div class="line">/home/OTUS/otus_homework_07/_test_folder/dir1/dir3/dublicate_3_3.txt  </div>
+<div class="line">/home/OTUS/otus_homework_07/_test_folder/dir1/dublicate_3_1.txt  </div>
+<div class="line">/home/OTUS/otus_homework_07/_test_folder/dir2/dublicate_3_2.txt  </div>
+<div class="line">  </div>
+<div class="line">/home/OTUS/otus_homework_07/_test_folder/dir1/dublicate_2_1.txt  </div>
+<div class="line">/home/OTUS/otus_homework_07/_test_folder/dir2/dublicate_2_2.txt  </div>
+<div class="line">  </div>
+<div class="line">/home/OTUS/otus_homework_07/_test_folder/dir1/dublicate_1_1.txt  </div>
+<div class="line">/home/OTUS/otus_homework_07/_test_folder/dir2/dublicate_1_2.txt  </div>
+</div><!-- fragment --> </li>
+</ol>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Тестирование &lt;a name="testing"&gt;&lt;/a&gt;</h2>
+<p >Для тестирования создана директория с тестовыми (otus_homework_07/_test_folder) файлами и несколькими вложенными директориями. Для простоты все тестовые файлы имеют расширение ".\*txt". Формат названия для файлов, являющихся дубликатами: <br  />
+</p>
+<p ><em>dublicate_(GROUP)_(NUMBER).txt ,</em> <br  />
+</p>
+<p >где <em>GROUP</em> - номер порядковый номер группы дубликатов, <em>NUMBER</em> - порядковый номер файла внутри группы. <br  />
+ Формат названия для файлов, не явзяющихся дубликаоами: <br  />
+</p>
+<p ><em>nondublicate_(NUMBER).txt ,</em> <br  />
+</p>
+<p >где <em>NUMBER</em> - порядковый номер файла. <br  />
+</p>
+<p >Здесь <a class="anchor" id="run"></a> Пример теста, который выводит все группы дубликатов файлов, находящихся в директории otus_homework_07/_test_folder. <br  />
+</p>
+<p >Другие тесты, использующие эти тестовые данные, выполнены <a href="https://github.com/sanlav89/otus_homework_07/blob/master/test_samefilesfinder.cpp">здесь</a>. <br  />
+</p>
+<p >Также выполнены <a href="https://github.com/sanlav89/otus_homework_07/blob/master/test_hash.cpp">unit-тесты</a> алгоритмов хэширования <br  />
  </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
