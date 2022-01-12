@@ -107,27 +107,34 @@ $ cmake --build .. --target package
 2. [Запуск](#run)  
 ```bash  
 $ ./bayan -i ../otus_homework_07/_test_folder/ -l 1  
-D:\WORK\OTUS\otus_homework_07\_test_folder\dir1\dir3\dir4\dublicate_3_4.txt  
-D:\WORK\OTUS\otus_homework_07\_test_folder\dir1\dir3\dublicate_3_3.txt  
-D:\WORK\OTUS\otus_homework_07\_test_folder\dir1\dublicate_3_1.txt  
-D:\WORK\OTUS\otus_homework_07\_test_folder\dir2\dublicate_3_2.txt  
-                                                                   
-D:\WORK\OTUS\otus_homework_07\_test_folder\dir1\dublicate_2_1.txt  
-D:\WORK\OTUS\otus_homework_07\_test_folder\dir2\dublicate_2_2.txt  
-                                                                   
-D:\WORK\OTUS\otus_homework_07\_test_folder\dir1\dublicate_1_1.txt  
-D:\WORK\OTUS\otus_homework_07\_test_folder\dir2\dublicate_1_2.txt  
+/home/OTUS/otus_homework_07/_test_folder/dir1/dir3/dir4/dublicate_3_4.txt  
+/home/OTUS/otus_homework_07/_test_folder/dir1/dir3/dublicate_3_3.txt  
+/home/OTUS/otus_homework_07/_test_folder/dir1/dublicate_3_1.txt  
+/home/OTUS/otus_homework_07/_test_folder/dir2/dublicate_3_2.txt  
+  
+/home/OTUS/otus_homework_07/_test_folder/dir1/dublicate_2_1.txt  
+/home/OTUS/otus_homework_07/_test_folder/dir2/dublicate_2_2.txt  
+  
+/home/OTUS/otus_homework_07/_test_folder/dir1/dublicate_1_1.txt  
+/home/OTUS/otus_homework_07/_test_folder/dir2/dublicate_1_2.txt  
 ```  
 ### Тестирование <a name="testing"></a>  
   
 Для тестирования создана директория с тестовыми (otus_homework_07/\_test_folder) файлами и несколькими вложенными директориями. Для простоты все тестовые файлы имеют расширение ".\*txt". Формат названия для файлов, являющихся дубликатами:  
-dublicate\_(GROUP)\_(NUMBER).txt ,  
-где GROUP - номер порядковый номер группы дубликатов, NUMBER - порядковый номер файла внутри группы.  
+  
+*dublicate\_(GROUP)\_(NUMBER).txt ,*  
+  
+где *GROUP* - номер порядковый номер группы дубликатов, *NUMBER* - порядковый номер файла внутри группы.  
 Формат названия для файлов, не явзяющихся дубликаоами:  
-nondublicate\_(NUMBER).txt ,  
-где NUMBER - порядковый номер файла.  
+  
+*nondublicate\_(NUMBER).txt ,*  
+  
+где *NUMBER* - порядковый номер файла.  
+  
 Здесь <a name="run"></a> Пример теста, который выводит все группы дубликатов файлов, находящихся в директории otus_homework_07/_test_folder.  
+  
 Другие тесты, использующие эти тестовые данные, выполнены [здесь](https://github.com/sanlav89/otus_homework_07/blob/master/test_samefilesfinder.cpp).  
+  
 Также выполнены [unit-тесты](https://github.com/sanlav89/otus_homework_07/blob/master/test_hash.cpp) алгоритмов хэширования  
   
   
